@@ -1,5 +1,5 @@
 from chartgen import BuildChart
-from flask import Flask, send_from_directory, after_this_request
+from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 
