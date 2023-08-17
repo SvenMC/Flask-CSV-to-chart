@@ -1,9 +1,14 @@
 from chartgen import BuildChart
+from flask import Flask, send_from_directory, after_this_request
 
-chart = BuildChart()
+app = Flask(__name__)
 
-chart.build()
 
-input('press any to delete...')
+@app.route("/chartgen/build")
+def hello_world():
+    chart = BuildChart()
 
-chart.delete_chart()
+    chart.build()
+    return send_from_directory(
+        directory=r'assets\charts', path=f'{chart.val}.png'
+    )
