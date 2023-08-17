@@ -1,3 +1,9 @@
-import sys
+from chartgen import BuildChart
 
-print(sys.version_info)
+chart = BuildChart()
+
+chart.build()
+
+input('press any to delete...')
+
+chart.delete_chart()
