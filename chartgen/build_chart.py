@@ -18,6 +18,8 @@ class BuildChart:
         # TODO add some logic here to pull out 0 values and
         # -  return if no positive values.
 
+        series = series.sort_values()
+
         self.generate_chart(series, self.chart_type)
 
     def generate_chart(self, series: pd.Series, title):
