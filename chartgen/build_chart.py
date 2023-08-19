@@ -21,7 +21,10 @@ class BuildChart:
         # Sort in ascending order
         series = series.sort_values()
 
-        self.generate_chart(series, self.chart_type)
+        if series.empty:
+            return None
+
+        return self.generate_chart(series, self.chart_type)
 
     def generate_chart(self, series: pd.Series, title):
 
@@ -57,7 +60,7 @@ class BuildChart:
 
         # Add Plot Title
         ax.set_title(
-            f'Support activity',
+            'Support activity',
             loc='center',
             fontdict=title_dict,
             pad=40
@@ -67,6 +70,7 @@ class BuildChart:
 
         self.full_path = rf'{self.asset_path}{self.val}.png'
         plt.savefig(self.full_path)
+        return self.val
 
     def delete_chart(self):
         os.remove(self.full_path)

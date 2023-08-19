@@ -13,12 +13,16 @@ def readcsv():
 def chart_build():
     data = ParseCSV()
 
+    paths = []
     for _series in data.get_series().values():
         chart = BuildChart()
 
-        chart.build(
+        path = chart.build(
             series=_series
         )
+        if path:
+            paths.append(path)
+
     return send_from_directory(
-        directory=r'assets\charts', path=f'{chart.val}.png'
+        directory=r'assets\charts', path=f'{paths[0]}.png'
     )
