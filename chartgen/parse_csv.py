@@ -12,3 +12,13 @@ class ParseCSV:
 
         # Strip non numerical columns
         self.support_df = support_df.select_dtypes('number')
+
+        print(self.get_series())
+
+    def get_series(self) -> dict:
+        series_dict = {}
+
+        for _column in self.support_df.columns:
+            series_dict[_column] = self.support_df[_column]
+
+        return series_dict

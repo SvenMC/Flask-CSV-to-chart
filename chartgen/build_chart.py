@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import mplcyberpunk  # noqa: F401 # used in plt.style
 import random
 import os
+import pandas as pd
 
 
 class BuildChart:
@@ -13,7 +14,7 @@ class BuildChart:
         self.chart_type = None
         self.full_path = None
 
-    def build(self):
+    def build(self, series: pd.Series):
 
         duration_dict = {
             "example1": 50,
