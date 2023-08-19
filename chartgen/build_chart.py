@@ -15,16 +15,12 @@ class BuildChart:
         self.full_path = None
 
     def build(self, series: pd.Series):
+        # TODO add some logic here to pull out 0 values and
+        # -  return if no positive values.
 
-        duration_dict = {
-            "example1": 50,
-            "example2": 400,
-            "example3": 150
-        }
+        self.generate_chart(series, self.chart_type)
 
-        self.generate_chart(duration_dict, self.chart_type)
-
-    def generate_chart(self, duration_dict, title):
+    def generate_chart(self, series: pd.Series, title):
 
         # Title font dict
         title_dict = {
@@ -34,8 +30,8 @@ class BuildChart:
             'verticalalignment': 'baseline'
         }
 
-        names = list(duration_dict.keys())
-        values = list(duration_dict.values())
+        names = series.index
+        values = series.values
 
         # Styling
         plt.style.use('cyberpunk')
@@ -58,12 +54,12 @@ class BuildChart:
 
         # Add Plot Title
         ax.set_title(
-            f'{title}',
+            f'{series.name}',
             loc='center',
             fontdict=title_dict,
             pad=40
         )
-        ax.set_xlabel('Time (Hours)', fontdict=title_dict, labelpad=40)
+        ax.set_xlabel(f'{series.name}', fontdict=title_dict, labelpad=40)
         ax.set_yticklabels(names, fontsize=12, fontweight='bold')
 
         self.full_path = rf'{self.asset_path}{self.val}.png'
