@@ -15,9 +15,10 @@ class BuildChart:
         self.full_path = None
 
     def build(self, series: pd.Series):
-        # TODO add some logic here to pull out 0 values and
-        # -  return if no positive values.
+        # Remove values that are 0 or below
+        series = series[series > 0]
 
+        # Sort in ascending order
         series = series.sort_values()
 
         self.generate_chart(series, self.chart_type)
@@ -56,7 +57,7 @@ class BuildChart:
 
         # Add Plot Title
         ax.set_title(
-            f'{series.name}',
+            f'Support activity',
             loc='center',
             fontdict=title_dict,
             pad=40
