@@ -2,6 +2,8 @@ from chartgen import BuildChart, ParseCSV
 from flask import Flask, send_from_directory
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = r'uploads'
+ALLOWED_EXTENSIONS = ['.csv']
 
 
 @app.route("/")
