@@ -9,11 +9,6 @@ app.config['UPLOAD_FOLDER'] = r'uploads/'
 ALLOWED_EXTENSIONS = ['.csv']
 
 
-@app.route("/")
-def readcsv():
-    return "<h1>hello</>"
-
-
 @app.route("/chartgen/build", methods=['POST'])
 def chart_build():
     if 'chart' not in request.files:
