@@ -4,7 +4,7 @@ import pandas as pd
 class ParseCSV:
 
     def __init__(self, filename: str) -> None:
-        file = pd.read_csv(r'playground\nvchart.csv')
+        file = pd.read_csv(fr'uploads\\{filename}')
         df = pd.DataFrame(file)
 
         # Set first column as index
@@ -12,8 +12,6 @@ class ParseCSV:
 
         # Strip non numerical columns
         self.support_df = support_df.select_dtypes('number')
-
-        print(self.get_series())
 
     def get_series(self) -> dict:
         series_dict = {}

@@ -1,1 +1,1 @@
-from unique_file_validator import UniqueFileValidator
+from .unique_file_validator import UniqueFileValidator

@@ -8,7 +8,7 @@ class UniqueFileValidator:
     assets_chart_path = r'assets\charts'
     uploads_path = r'uploads'
 
-    def validate_uploads(self):
+    def validate_upload(self):
         count = 0
         while True:
             val = random.randint(100000000000, 999999999999)

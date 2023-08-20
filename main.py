@@ -1,10 +1,11 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request, abort
+import os
 
 from chartgen import BuildChart, ParseCSV
 from utils import UniqueFileValidator
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = r'uploads'
+app.config['UPLOAD_FOLDER'] = r'uploads/'
 ALLOWED_EXTENSIONS = ['.csv']
 
 
@@ -13,9 +14,18 @@ def readcsv():
     return "<h1>hello</>"
 
 
-@app.route("/chartgen/build")
+@app.route("/chartgen/build", methods=['POST'])
 def chart_build():
-    unique_filename = UniqueFileValidator.validate_uploads()
+    if 'chart' not in request.files:
+        abort(400)
+
+    file = request.files['chart']
+    unique_filename = UniqueFileValidator().validate_upload()
+    file.name = unique_filename
+    file.save(
+        os.path.join(app.config['UPLOAD_FOLDER'], unique_filename)
+    )
+
     data = ParseCSV(
         filename=unique_filename
     )
