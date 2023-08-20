@@ -1,5 +1,7 @@
-from chartgen import BuildChart, ParseCSV
 from flask import Flask, send_from_directory
+
+from chartgen import BuildChart, ParseCSV
+from utils import UniqueFileValidator
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = r'uploads'
@@ -13,7 +15,10 @@ def readcsv():
 
 @app.route("/chartgen/build")
 def chart_build():
-    data = ParseCSV()
+    unique_filename = UniqueFileValidator.validate_uploads()
+    data = ParseCSV(
+        filename=unique_filename
+    )
 
     paths = []
     for _series in data.get_series().values():
