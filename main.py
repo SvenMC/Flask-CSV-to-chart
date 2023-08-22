@@ -38,3 +38,5 @@ def chart_build():
     return send_from_directory(
         directory=r'assets\charts', path=f'{paths[0]}.png'
     )
+
+# TODO Add endpoint that parses pre-build series
